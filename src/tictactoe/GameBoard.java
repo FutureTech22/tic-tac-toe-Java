@@ -40,16 +40,15 @@ public class GameBoard {
 		// loop over each row to check if there is a winner
 		for (int row=0; row < gameBoard.length; row++)
 		{
-			if(gameBoard[row][0] == gameBoard[row][1] && gameBoard[row][1] == gameBoard[row][2] 
-					&& gameBoard[row][0] != ' ' )
+			if(gameBoard[row][0] == gameBoard[row][1] && gameBoard[row][1] == gameBoard[row][2] && gameBoard[row][0] != ' ' )
 				return true;
 		}
 		// loop over each column to check if there is a winner
 		for (int col=0; col < gameBoard[0].length; col++)
 		{
 			
-			if(gameBoard[col][0] == gameBoard[col][1] && gameBoard[col][1] == gameBoard[col][2] &&
-					gameBoard[col][0] != ' ')
+			if(gameBoard[0][col] == gameBoard[1][col] && gameBoard[1][col] == gameBoard[2][col] &&
+					gameBoard[0][col] != ' ')
 				return true;
 		}
 			//check diagonally for winners
