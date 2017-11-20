@@ -7,7 +7,7 @@ public class Tictactoe {
 		myGame.displayBoard();
 		int counter = 1;
 		
-		while(myGame.gameActive()) 
+		while(myGame.gameActive() && counter < 10) 
 		{
 			if (counter % 2 == 0)
 				myGame.askPlayer('O');
@@ -17,6 +17,11 @@ public class Tictactoe {
 			
 			myGame.displayBoard();
 			myGame.checkForWinner();
+			
+			if (counter == 10) 
+			{
+				System.out.print("'\n'Draw!");
+			}
 		}
 	}
 }

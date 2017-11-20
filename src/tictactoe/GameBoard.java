@@ -41,7 +41,10 @@ public class GameBoard {
 		for (int row=0; row < gameBoard.length; row++)
 		{
 			if(gameBoard[row][0] == gameBoard[row][1] && gameBoard[row][1] == gameBoard[row][2] && gameBoard[row][0] != ' ' )
-				return true;
+			{
+				System.out.print("\nThe winner is " + gameBoard[row][0]);
+				gameOnGoing = false;	
+			}
 		}
 		// loop over each column to check if there is a winner
 		for (int col=0; col < gameBoard[0].length; col++)
@@ -49,16 +52,25 @@ public class GameBoard {
 			
 			if(gameBoard[0][col] == gameBoard[1][col] && gameBoard[1][col] == gameBoard[2][col] &&
 					gameBoard[0][col] != ' ')
-				return true;
+			{
+				System.out.print("\nThe winner is " + gameBoard[0][col]);
+				gameOnGoing = false;	
+			}
 		}
 			//check diagonally for winners
-			if(gameBoard[0][0] == gameBoard[1][1] & gameBoard[1][1] == gameBoard[2][2] && 
+			if(gameBoard[0][0] == gameBoard[1][1] && gameBoard[1][1] == gameBoard[2][2] && 
 					gameBoard[0][0] != ' ')
-				return true;
-			if(gameBoard[2][0] == gameBoard[1][1] & gameBoard[1][1] == gameBoard[0][2] && 
-					gameBoard[0][0] != ' ')
-				return true;
-			
+			{
+				System.out.print("\nThe winner is " + gameBoard[0][0]);
+				gameOnGoing = false;	
+			}
+			if(gameBoard[2][0] == gameBoard[1][1] && gameBoard[1][1] == gameBoard[0][2] && 
+					gameBoard[0][2] != ' ')
+			{
+				System.out.print("\nThe winner is " + gameBoard[1][1]);
+				gameOnGoing = false;	
+			}
+
 			return false;
 		
 	}
@@ -78,12 +90,12 @@ public class GameBoard {
 					int row, col;
 			do
 			{
-				System.out.println("\n");
-				System.out.printf("Player %s please enter a row (1-3) :", player) ;
+				
+				System.out.printf("\n Player %s please enter a row (1-3) :", player) ;
 				row = keyboard.nextInt();
 				
 				
-				System.out.printf("Player %s please enter a column (1-3) :", player);
+				System.out.printf("\n Player %s please enter a column (1-3) :", player);
 				col = keyboard.nextInt();
 				
 			} while (notValid(row, col));
@@ -107,7 +119,7 @@ public class GameBoard {
 			return true;
 		else
 		{
-			System.out.println("That position is taken");
+			System.out.println("\nThat position is taken");
 			return false;
 		}
 	}
@@ -116,7 +128,7 @@ public class GameBoard {
 	
 	public boolean makeMove(char player,int row,int col) 
 	{
-		if(row >= 0 && row <= 2 && col >=0 && col <= 2)  //if move is within the array
+		if(row >= 0 && row <= 2 && col >= 0 && col <= 2)  //if move is within the array
 		{
 				if (gameBoard[row][col] != ' ')	//if game board position does not equal empty space
 					return false;  
