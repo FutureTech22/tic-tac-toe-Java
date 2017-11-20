@@ -34,6 +34,36 @@ public class GameBoard {
 	} 
 	// end of game board display method
 	
+	//this method checks to see if there is a winner
+	public boolean checkForWinner() 
+	{
+		// loop over each row to check if there is a winner
+		for (int row=0; row < gameBoard.length; row++)
+		{
+			if(gameBoard[row][0] == gameBoard[row][1] && gameBoard[row][1] == gameBoard[row][2] 
+					&& gameBoard[row][0] != ' ' )
+				return true;
+		}
+		// loop over each column to check if there is a winner
+		for (int col=0; col < gameBoard[0].length; col++)
+		{
+			
+			if(gameBoard[col][0] == gameBoard[col][1] && gameBoard[col][1] == gameBoard[col][2] &&
+					gameBoard[col][0] != ' ')
+				return true;
+		}
+			//check diagonally for winners
+			if(gameBoard[0][0] == gameBoard[1][1] & gameBoard[1][1] == gameBoard[2][2] && 
+					gameBoard[0][0] != ' ')
+				return true;
+			if(gameBoard[2][0] == gameBoard[1][1] & gameBoard[1][1] == gameBoard[0][2] && 
+					gameBoard[0][0] != ' ')
+				return true;
+			
+			return false;
+		
+	}
+	
 	//This method will return true if the variable is active
 	
 	public boolean gameActive() {
@@ -45,16 +75,16 @@ public class GameBoard {
 	
 	public boolean askPlayer(char player) 
 	{
-			Scanner keyboard = new Scanner(System.in);
+			keyboard = new Scanner(System.in);
 					int row, col;
 			do
 			{
 				System.out.println("\n");
-				System.out.print("Player %'s please enter a row (1-3) :") ;
+				System.out.printf("Player %s please enter a row (1-3) :", player) ;
 				row = keyboard.nextInt();
 				
 				
-				System.out.print("Player %'s please enter a column (1-3) :");
+				System.out.printf("Player %s please enter a column (1-3) :", player);
 				col = keyboard.nextInt();
 				
 			} while (notValid(row, col));
@@ -62,15 +92,25 @@ public class GameBoard {
 			return makeMove(player,row-1 ,col-1);
 	} // end of ask player method
 	
-	//this method will validate if the players move is between 1-3
+	//this method will validate if the players move is between 1-3 and position is currently empty
 	
 	public boolean notValid(int row, int col)
 	{
-		if (row > 3 || row < 1)
+		if (row > 3 || row < 1 || col > 3 || col < 1 || !isEmpty(row, col))
 			return true;
-		if (col > 3 || col < 1)
-			return true;	
-		return false;
+		else
+			return false;
+	}
+	
+	public boolean isEmpty(int row, int col) 
+	{
+		if (gameBoard[row-1][col-1] == ' ')
+			return true;
+		else
+		{
+			System.out.println("That position is taken");
+			return false;
+		}
 	}
 	
 	//this method will validate if the players move is allowed and return true if the move is valid

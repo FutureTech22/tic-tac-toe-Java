@@ -15,8 +15,8 @@ public class Tictactoe {
 				myGame.askPlayer('X');
 			counter++;
 			
-			
 			myGame.displayBoard();
+			myGame.checkForWinner();
 		}
 	}
 }
